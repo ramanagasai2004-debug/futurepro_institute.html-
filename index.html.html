@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>FuturePro Institute — Digital Automation Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Noto+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04080f;--surface:#0b1220;--card:#101a2b;--border:#1e3050;
+  --accent:#00c6ff;--accent2:#0072ff;--gold:#f5c518;--green:#00e676;
+  --red:#ff4444;--text:#e8f0fe;--muted:#7a94b8;
+  --font-head:'Rajdhani',sans-serif;--font-body:'Noto Sans',sans-serif;
+}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:15px;line-height:1.6;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,198,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,198,255,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+
+.gov-banner{background:linear-gradient(90deg,#001f4d,#003080);border-bottom:2px solid var(--gold);padding:0.55rem 1.5rem;display:flex;align-items:center;gap:1rem;position:relative;z-index:10}
+.gov-emblem{width:38px;height:38px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0}
+.gov-text{font-family:var(--font-head);font-size:0.78rem;line-height:1.35;letter-spacing:0.04em}
+.gov-text strong{color:var(--gold);font-size:0.86rem;display:block;letter-spacing:0.06em}
+.gov-badge{margin-left:auto;background:var(--gold);color:#001f4d;font-family:var(--font-head);font-size:0.68rem;font-weight:700;padding:0.28rem 0.8rem;border-radius:3px;letter-spacing:0.12em;white-space:nowrap}
+
+nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:stretch;gap:0;position:relative;z-index:10;min-height:64px}
+.nav-brand{display:flex;align-items:center;gap:0.9rem;padding:0.7rem 0;border-right:1px solid var(--border);padding-right:1.5rem;margin-right:1.5rem}
+.nav-icon{width:42px;height:42px;border-radius:8px;background:linear-gradient(135deg,var(--accent2),var(--accent));display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.nav-name .main{font-family:var(--font-head);font-size:1.2rem;font-weight:700;letter-spacing:0.06em}
+.nav-name .main span{color:var(--accent)}
+.nav-name .sub{font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
+.nav-meta{display:flex;flex-direction:column;justify-content:center;padding-left:1.2rem;gap:0.2rem}
+.nav-meta .reg{font-size:0.68rem;color:var(--muted);letter-spacing:0.06em}
+.nav-meta .reg span{color:var(--accent);font-weight:500}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:0.8rem}
+.nav-cert-badge{border:1px solid var(--gold);color:var(--gold);font-family:var(--font-head);font-size:0.7rem;font-weight:600;padding:0.3rem 0.8rem;border-radius:4px;letter-spacing:0.08em}
+
+.shell{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:2rem 1rem 4rem}
+
+.hero{text-align:center;padding:2rem 1rem 1.5rem}
+.hero-eyebrow{font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:0.7rem}
+.hero h1{font-family:var(--font-head);font-size:clamp(1.7rem,4.5vw,2.8rem);font-weight:700;line-height:1.1;margin-bottom:0.7rem}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{color:var(--muted);font-size:0.9rem;max-width:54ch;margin:0 auto 1.2rem}
+.topics{display:flex;flex-wrap:wrap;gap:0.45rem;justify-content:center;margin-bottom:1.2rem}
+.topic-pill{background:rgba(0,198,255,0.07);border:1px solid rgba(0,198,255,0.22);color:var(--accent);font-size:0.7rem;padding:0.28rem 0.75rem;border-radius:20px;letter-spacing:0.04em}
+.accred-strip{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin-bottom:1.8rem}
+.accred-item{background:rgba(245,197,24,0.06);border:1px solid rgba(245,197,24,0.2);color:var(--gold);font-size:0.68rem;padding:0.25rem 0.7rem;border-radius:3px;letter-spacing:0.08em;font-family:var(--font-head);font-weight:600}
+
+.journey-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;margin-bottom:2rem}
+.journey-step{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1rem;text-align:center}
+.journey-step.step-free{border-color:var(--green)}
+.journey-step.step-2{border-color:rgba(0,198,255,0.35)}
+.journey-step.step-3{border-color:rgba(245,197,24,0.35)}
+.step-icon{font-size:1.6rem;margin-bottom:0.4rem}
+.step-name{font-family:var(--font-head);font-size:0.95rem;font-weight:700;margin-bottom:0.2rem}
+.step-free .step-name{color:var(--green)}
+.step-2 .step-name{color:var(--accent)}
+.step-3 .step-name{color:var(--gold)}
+.step-desc{font-size:0.72rem;color:var(--muted)}
+
+.progress-wrap{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.4rem;margin-bottom:1.8rem}
+.progress-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem}
+.progress-head span{font-family:var(--font-head);font-size:0.82rem;color:var(--muted)}
+.progress-head strong{color:var(--accent);font-size:0.95rem}
+.bar-bg{height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent2),var(--accent));transition:width 0.6s ease}
+
+.day-tabs{display:flex;gap:0.5rem;margin-bottom:1.4rem;flex-wrap:wrap}
+.day-tab{font-family:var(--font-head);font-size:0.86rem;font-weight:600;padding:0.52rem 1.2rem;border-radius:6px;border:1px solid var(--border);background:var(--card);color:var(--muted);cursor:pointer;transition:all 0.2s;letter-spacing:0.04em}
+.day-tab.active{background:linear-gradient(135deg,#001f4d,#0072ff22);border-color:var(--accent);color:var(--accent)}
+.day-tab.locked{opacity:0.4;cursor:not-allowed}
+.day-tab.done{border-color:var(--green);color:var(--green)}
+
+.video-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1.1rem;transition:border-color 0.2s}
+.video-card.active-card{border-color:var(--accent)}
+.video-card.locked-card{opacity:0.45;pointer-events:none}
+.video-card.done-card{border-color:var(--green)}
+.vid-header{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem}
+.vid-num{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:700;font-size:1rem;flex-shrink:0}
+.video-card.locked-card .vid-num{background:var(--border)}
+.video-card.done-card .vid-num{background:linear-gradient(135deg,#00b09b,var(--green))}
+.vid-info{flex:1}
+.vid-title{font-family:var(--font-head);font-size:1.02rem;font-weight:600;letter-spacing:0.03em}
+.vid-meta{font-size:0.72rem;color:var(--muted);margin-top:0.1rem}
+.vid-status{font-size:0.72rem;padding:0.18rem 0.55rem;border-radius:12px;font-weight:500;white-space:nowrap}
+.status-locked{background:rgba(122,148,184,0.1);color:var(--muted)}
+.status-done{background:rgba(0,230,118,0.12);color:var(--green)}
+.status-unlocked{background:rgba(245,197,24,0.15);color:var(--gold)}
+.vid-body{border-top:1px solid var(--border);padding:1.1rem}
+
+/* VIDEO EMBED */
+.video-embed-wrap{border-radius:8px;overflow:hidden;aspect-ratio:16/9;margin-bottom:0.9rem;background:#000}
+.video-embed-wrap iframe{width:100%;height:100%;border:none;display:block}
+.video-placeholder{background:#000;border-radius:8px;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;margin-bottom:0.9rem}
+.video-placeholder::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(0,114,255,0.18),transparent 70%)}
+.player-label{font-family:var(--font-head);font-size:0.75rem;letter-spacing:0.14em;color:rgba(255,255,255,0.32);text-transform:uppercase;margin-bottom:0.7rem;position:relative}
+.play-btn{width:60px;height:60px;border-radius:50%;background:rgba(0,198,255,0.18);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:1.4rem;position:relative}
+.vid-prog-bar{position:absolute;bottom:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent2),var(--accent));transition:width 0.4s}
+.vid-timer{position:absolute;bottom:8px;right:10px;font-size:0.68rem;color:rgba(255,255,255,0.45);font-family:monospace}
+.sim-watch-btn{width:100%;padding:0.65rem;background:linear-gradient(90deg,rgba(0,114,255,0.14),rgba(0,198,255,0.14));border:1px solid var(--accent);color:var(--accent);font-family:var(--font-head);font-size:0.88rem;font-weight:600;letter-spacing:0.05em;border-radius:6px;cursor:pointer;transition:background 0.2s;margin-bottom:0.9rem}
+.sim-watch-btn:hover{background:linear-gradient(90deg,rgba(0,114,255,0.26),rgba(0,198,255,0.26))}
+.sim-watch-btn:disabled{opacity:0.35;cursor:not-allowed}
+
+.quiz-panel{background:rgba(0,198,255,0.04);border:1px solid rgba(0,198,255,0.18);border-radius:10px;padding:1.1rem}
+.quiz-title{font-family:var(--font-head);font-size:0.97rem;color:var(--accent);margin-bottom:0.9rem;letter-spacing:0.04em}
+.question{margin-bottom:0.9rem}
+.question p{font-size:0.86rem;color:var(--text);margin-bottom:0.5rem}
+.options{display:flex;gap:0.45rem;flex-wrap:wrap}
+.opt-btn{padding:0.38rem 0.9rem;border-radius:20px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:0.78rem;cursor:pointer;transition:all 0.2s}
+.opt-btn:hover{border-color:var(--accent);color:var(--accent)}
+.opt-btn.selected-yes{border-color:var(--green);background:rgba(0,230,118,0.1);color:var(--green)}
+.opt-btn.selected-no{border-color:var(--red);background:rgba(255,68,68,0.1);color:var(--red)}
+.next-btn{width:100%;margin-top:0.9rem;padding:0.75rem;background:linear-gradient(90deg,var(--accent2),var(--accent));color:#fff;font-family:var(--font-head);font-size:0.97rem;font-weight:700;letter-spacing:0.07em;border:none;border-radius:8px;cursor:pointer;transition:opacity 0.2s;display:none}
+.next-btn:hover{opacity:0.87}
+
+.day-complete{background:linear-gradient(135deg,rgba(0,230,118,0.07),rgba(0,198,255,0.07));border:1px solid var(--green);border-radius:10px;padding:1.4rem;text-align:center;display:none;margin-top:0.9rem}
+.day-complete h3{font-family:var(--font-head);font-size:1.25rem;color:var(--green);margin-bottom:0.4rem}
+.day-complete p{font-size:0.83rem;color:var(--muted)}
+.unlock-day-btn{margin-top:1rem;padding:0.7rem 2rem;border:none;border-radius:8px;font-family:var(--font-head);font-weight:700;font-size:1rem;cursor:pointer;letter-spacing:0.06em}
+.btn-day2-unlock{background:linear-gradient(90deg,var(--accent2),var(--accent));color:#fff}
+.btn-day3-unlock{background:linear-gradient(90deg,#b8860b,var(--gold));color:#000}
+
+.payment-gate{display:none;background:var(--card);border-radius:16px;overflow:hidden;margin-top:1rem;box-shadow:0 0 60px rgba(0,198,255,0.08)}
+.pay-header{background:linear-gradient(135deg,#001f4d,#0a0f20);padding:2rem;text-align:center;border-bottom:1px solid var(--border)}
+.pay-lock-icon{font-size:3rem;margin-bottom:0.8rem}
+.pay-header h2{font-family:var(--font-head);font-size:1.6rem;font-weight:700;margin-bottom:0.4rem}
+.pay-header p{color:var(--muted);font-size:0.85rem}
+.pay-body{padding:2rem}
+.pay-plan{border-radius:12px;padding:1.5rem;margin-bottom:1.5rem}
+.pay-plan.plan-day2{background:linear-gradient(135deg,rgba(0,198,255,0.06),rgba(0,114,255,0.06));border:2px solid var(--accent)}
+.pay-plan.plan-day3{background:linear-gradient(135deg,rgba(245,197,24,0.07),rgba(255,140,0,0.05));border:2px solid var(--gold)}
+.pay-plan .plan-label{font-size:0.7rem;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:0.5rem;font-family:var(--font-head);text-align:center}
+.plan-day2 .plan-label{color:var(--accent)}
+.plan-day3 .plan-label{color:var(--gold)}
+.pay-plan .plan-price{font-family:var(--font-head);font-size:3rem;font-weight:700;line-height:1;margin-bottom:0.2rem;text-align:center}
+.plan-day2 .plan-price{color:var(--accent)}
+.plan-day3 .plan-price{color:var(--gold)}
+.pay-plan .plan-sub{font-size:0.78rem;color:var(--muted);margin-bottom:1.2rem;text-align:center}
+.plan-features{list-style:none;margin-bottom:1.4rem}
+.plan-features li{font-size:0.83rem;color:var(--text);padding:0.35rem 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;gap:0.6rem;align-items:flex-start}
+.pay-methods{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem;justify-content:center}
+.pay-method{padding:0.45rem 1rem;border-radius:6px;border:1px solid var(--border);background:var(--surface);font-size:0.78rem;color:var(--muted);cursor:pointer;transition:all 0.2s}
+.pay-method:hover,.pay-method.selected{border-color:var(--accent);color:var(--accent);background:rgba(0,198,255,0.07)}
+.pay-secure{display:flex;align-items:center;gap:0.5rem;justify-content:center;font-size:0.72rem;color:var(--muted);margin-bottom:1.2rem}
+.pay-now-btn{width:100%;padding:1rem;border:none;border-radius:10px;font-family:var(--font-head);font-size:1.1rem;font-weight:700;letter-spacing:0.08em;cursor:pointer;transition:opacity 0.2s}
+.pay-now-btn.btn-day2{background:linear-gradient(90deg,var(--accent2),var(--accent));color:#fff}
+.pay-now-btn.btn-day3{background:linear-gradient(90deg,#b8860b,var(--gold));color:#000}
+.pay-now-btn:hover{opacity:0.88}
+.upi-input-wrap{display:flex;gap:0.6rem;margin-bottom:1rem}
+.upi-input{flex:1;padding:0.65rem 0.9rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:0.85rem;outline:none}
+.upi-input:focus{border-color:var(--accent)}
+.upi-verify-btn{padding:0.65rem 1.2rem;background:rgba(0,198,255,0.12);border:1px solid var(--accent);color:var(--accent);font-family:var(--font-head);font-weight:600;font-size:0.85rem;border-radius:8px;cursor:pointer;white-space:nowrap}
+.pay-success{display:none;text-align:center;padding:2.5rem 2rem}
+.pay-success .tick{font-size:3.5rem;margin-bottom:1rem;animation:pop 0.4s ease}
+.pay-success h3{font-family:var(--font-head);font-size:1.5rem;color:var(--green);margin-bottom:0.5rem}
+.pay-success p{color:var(--muted);font-size:0.85rem;margin-bottom:1.5rem}
+.proceed-btn{padding:0.8rem 2.5rem;border:none;border-radius:8px;font-family:var(--font-head);font-weight:700;font-size:1rem;letter-spacing:0.07em;cursor:pointer}
+.proceed-btn.green-btn{background:var(--green);color:#000}
+.proceed-btn.gold-btn{background:var(--gold);color:#000}
+@keyframes pop{0%{transform:scale(0.5);opacity:0}80%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+
+@media(max-width:600px){
+  .nav-meta{display:none}
+  .journey-steps{grid-template-columns:1fr}
+  .hero h1{font-size:1.6rem}
+}
+</style>
+</head>
+<body>
+
+<div class="gov-banner">
+  <div class="gov-emblem">🇮🇳</div>
+  <div class="gov-text">
+    <strong>Government of India — Certified Skill Development Platform</strong>
+    Ministry of Skill Development &amp; Entrepreneurship · National Skill Development Corporation (NSDC)
+  </div>
+  <div class="gov-badge">NSDC CERTIFIED ✓</div>
+</div>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-icon">⚡</div>
+    <div class="nav-name">
+      <div class="main">Future<span>Pro</span> Institute</div>
+      <div class="sub">Digital Automation Academy</div>
+    </div>
+  </div>
+  <div class="nav-meta">
+    <div class="reg">Reg. No: <span>NSDC/FPI/2024/04872</span></div>
+    <div class="reg">Accredited: <span>MoSDE · Digital India · AICTE</span></div>
+  </div>
+  <div class="nav-right">
+    <div class="nav-cert-badge">🏅 ISO 9001:2015</div>
+  </div>
+</nav>
+
+<div class="shell">
+  <div class="hero">
+    <div class="hero-eyebrow">3-Day Certified Transformation Programme</div>
+    <h1>Master <em>Automation</em> &amp; Build Your Future Income</h1>
+    <p>Government-certified, structured learning. Complete each session to unlock the next.</p>
+    <div class="topics">
+      <span class="topic-pill">🤖 Automation</span>
+      <span class="topic-pill">💡 Digital Skills</span>
+      <span class="topic-pill">🧠 Personality Development</span>
+      <span class="topic-pill">🚀 Motivation</span>
+      <span class="topic-pill">💰 Future Income</span>
+    </div>
+    <div class="accred-strip">
+      <div class="accred-item">✓ NSDC Approved</div>
+      <div class="accred-item">✓ Digital India Partner</div>
+      <div class="accred-item">✓ AICTE Recognised</div>
+      <div class="accred-item">✓ ISO 9001:2015</div>
+    </div>
+  </div>
+
+  <div class="journey-steps">
+    <div class="journey-step step-free">
+      <div class="step-icon">🌱</div>
+      <div class="step-name">Day 1 — Foundations</div>
+      <div class="step-desc">3 Sessions · Automation &amp; Mindset</div>
+    </div>
+    <div class="journey-step step-2">
+      <div class="step-icon">🚀</div>
+      <div class="step-name">Day 2 — Growth</div>
+      <div class="step-desc">3 Sessions · Digital Skills &amp; Income</div>
+    </div>
+    <div class="journey-step step-3">
+      <div class="step-icon">🏆</div>
+      <div class="step-name">Day 3 — Mastery</div>
+      <div class="step-desc">2 Sessions · Certification</div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-head"><span>📊 Your Programme Progress</span><strong id="prog-pct">0% Complete</strong></div>
+    <div class="bar-bg"><div class="bar-fill" id="prog-bar" style="width:0%"></div></div>
+  </div>
+
+  <div class="day-tabs">
+    <div class="day-tab active" data-day="1" onclick="switchDay(1)">📅 Day 1 — Foundations</div>
+    <div class="day-tab locked" data-day="2" onclick="switchDay(2)">🔒 Day 2 — Growth</div>
+    <div class="day-tab locked" data-day="3" onclick="switchDay(3)">🔒 Day 3 — Mastery</div>
+  </div>
+
+  <!-- DAY 1 -->
+  <div id="day-1">
+
+    <div class="video-card active-card" id="card-1-1">
+      <div class="vid-header">
+        <div class="vid-num">1</div>
+        <div class="vid-info">
+          <div class="vid-title">Introduction to Automation &amp; Digital Opportunity</div>
+          <div class="vid-meta">FuturePro Institute · Day 1, Session 1 · ~15 mins</div>
+        </div>
+        <div class="vid-status status-unlocked">▶ Unlocked</div>
+      </div>
+      <div class="vid-body">
+        <!-- REPLACE src below with your YouTube embed URL: https://www.youtube.com/embed/YOUR_VIDEO_ID -->
+        <div class="video-placeholder" id="player-1-1">
+          <div class="player-label">FuturePro — Session 1</div>
+          <div class="play-btn">▶</div>
+          <div class="vid-prog-bar" id="vbar-1-1" style="width:0%"></div>
+          <div class="vid-timer" id="vtimer-1-1">0:00 / 15:00</div>
+        </div>
+        <button class="sim-watch-btn" id="watchbtn-1-1" onclick="simulateWatch(1,1)">▶ Start Watching Session 1</button>
+        <div class="quiz-panel" id="quiz-1-1" style="display:none">
+          <div class="quiz-title">📋 FuturePro Check-In — Session 1</div>
+          <div class="question"><p>1. Are you interested in learning automation for your future career?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q1','yes')">✅ Yes, very interested!</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q1','no')">🤔 Need more info</button>
+            </div></div>
+          <div class="question"><p>2. Did you understand the digital opportunities in this session?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q2','yes')">✅ Yes, I understood</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q2','no')">🔁 Need to re-watch</button>
+            </div></div>
+          <div class="question"><p>3. Are you ready to continue to Session 2?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q3','yes')">🚀 Yes, unlock next!</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q3','no')">⏸ I'll take a break</button>
+            </div></div>
+          <button class="next-btn" id="nextbtn-1-1" onclick="unlockNext(1,2)">Unlock Session 2 →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-card locked-card" id="card-1-2">
+      <div class="vid-header">
+        <div class="vid-num">2</div>
+        <div class="vid-info">
+          <div class="vid-title">Motivation &amp; Mindset for Success</div>
+          <div class="vid-meta">FuturePro Institute · Day 1, Session 2 · ~20 mins</div>
+        </div>
+        <div class="vid-status status-locked">🔒 Locked</div>
+      </div>
+      <div class="vid-body">
+        <div class="video-placeholder"><div class="player-label">Complete Session 1 to unlock</div><div class="play-btn" style="opacity:0.3">🔒</div></div>
+        <button class="sim-watch-btn" id="watchbtn-1-2" onclick="simulateWatch(1,2)" disabled>🔒 Complete Session 1 First</button>
+        <div class="quiz-panel" id="quiz-1-2" style="display:none">
+          <div class="quiz-title">📋 FuturePro Check-In — Session 2</div>
+          <div class="question"><p>1. Has this session motivated you to take action?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q4','yes')">✅ Yes, motivated!</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q4','no')">🤔 Still thinking</button>
+            </div></div>
+          <div class="question"><p>2. Did you understand the success mindset principles?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q5','yes')">✅ Clearly understood</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q5','no')">🔁 Want to review</button>
+            </div></div>
+          <div class="question"><p>3. Are you ready to move to Session 3?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q6','yes')">🚀 Let's go!</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q6','no')">⏸ Not yet</button>
+            </div></div>
+          <button class="next-btn" id="nextbtn-1-2" onclick="unlockNext(1,3)">Unlock Session 3 →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-card locked-card" id="card-1-3">
+      <div class="vid-header">
+        <div class="vid-num">3</div>
+        <div class="vid-info">
+          <div class="vid-title">Personality Development &amp; Communication Skills</div>
+          <div class="vid-meta">FuturePro Institute · Day 1, Session 3 · ~18 mins</div>
+        </div>
+        <div class="vid-status status-locked">🔒 Locked</div>
+      </div>
+      <div class="vid-body">
+        <div class="video-placeholder"><div class="player-label">Complete Session 2 to unlock</div><div class="play-btn" style="opacity:0.3">🔒</div></div>
+        <button class="sim-watch-btn" id="watchbtn-1-3" onclick="simulateWatch(1,3)" disabled>🔒 Complete Session 2 First</button>
+        <div class="quiz-panel" id="quiz-1-3" style="display:none">
+          <div class="quiz-title">📋 FuturePro Check-In — Session 3</div>
+          <div class="question"><p>1. Are you seeing the value of personality development?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q7','yes')">✅ Absolutely yes!</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q7','no')">🤔 Want more clarity</button>
+            </div></div>
+          <div class="question"><p>2. Did you understand the communication techniques?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q8','yes')">✅ Yes, understood well</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q8','no')">🔁 Need re-watch</button>
+            </div></div>
+          <div class="question"><p>3. Are you excited to continue your journey?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q9','yes')">🚀 Very excited!</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q9','no')">⏸ Will decide</button>
+            </div></div>
+          <button class="next-btn" id="nextbtn-1-3" onclick="completeDay1()">✅ Complete Day 1!</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-complete" id="daydone-1">
+      <div style="font-size:2rem;margin-bottom:0.5rem">🎉</div>
+      <h3>Day 1 Complete — Excellent Work!</h3>
+      <p style="margin-bottom:1rem">You have completed all 3 sessions. Unlock Day 2 to continue!</p>
+      <button class="unlock-day-btn btn-day2-unlock" onclick="showPayment(2)">🔓 Unlock Day 2 →</button>
+    </div>
+
+    <div class="payment-gate" id="payment-gate-2">
+      <div id="pay2-form">
+        <div class="pay-header">
+          <div class="pay-lock-icon">🔐</div>
+          <h2>Unlock Day 2 — Growth</h2>
+          <p>Access 3 advanced sessions on Digital Skills, Future Income &amp; Automation Tools</p>
+        </div>
+        <div class="pay-body">
+          <div class="pay-plan plan-day2">
+            <div class="plan-label">Day 2 — Growth Programme</div>
+            <div class="plan-price">₹2,000</div>
+            <div class="plan-sub">One-time payment · Instant access</div>
+            <ul class="plan-features">
+              <li><span>✅</span> Digital Skills for the Modern Economy (22 mins)</li>
+              <li><span>✅</span> Building Your Future Income Streams (25 mins)</li>
+              <li><span>✅</span> Automation Tools &amp; Practical Implementation (20 mins)</li>
+              <li><span>✅</span> Progress certificate after Day 2 completion</li>
+              <li><span>✅</span> Access to FuturePro community group</li>
+            </ul>
+            <div style="font-size:0.75rem;color:var(--muted);margin-bottom:1rem;text-align:center">Choose payment method:</div>
+            <div class="pay-methods">
+              <div class="pay-method selected" onclick="selMethod(this)">📱 UPI</div>
+              <div class="pay-method" onclick="selMethod(this)">🏦 Net Banking</div>
+              <div class="pay-method" onclick="selMethod(this)">💳 Card</div>
+              <div class="pay-method" onclick="selMethod(this)">📲 Paytm</div>
+              <div class="pay-method" onclick="selMethod(this)">🟢 PhonePe</div>
+            </div>
+            <div class="upi-input-wrap">
+              <input class="upi-input" type="text" placeholder="Enter UPI ID (e.g. name@upi)" id="upi2"/>
+              <button class="upi-verify-btn" onclick="verifyUPI('upi2')">Verify</button>
+            </div>
+            <div class="pay-secure">🔒 256-bit SSL &nbsp;·&nbsp; ✅ RBI Compliant &nbsp;·&nbsp; 🛡️ 100% Safe</div>
+            <button class="pay-now-btn btn-day2" onclick="processPayment(2)">Pay &amp; Unlock Day 2 →</button>
+          </div>
+        </div>
+      </div>
+      <div class="pay-success" id="pay2-success">
+        <div class="tick">✅</div>
+        <h3>Payment Successful!</h3>
+        <p>Day 2 is now unlocked. Your learning journey continues!</p>
+        <button class="proceed-btn green-btn" onclick="unlockDay(2)">Go to Day 2 →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div id="day-2" style="display:none">
+
+    <div class="video-card active-card" id="card-2-1">
+      <div class="vid-header">
+        <div class="vid-num">1</div>
+        <div class="vid-info">
+          <div class="vid-title">Digital Skills for the Modern Economy</div>
+          <div class="vid-meta">FuturePro Institute · Day 2, Session 1 · ~22 mins</div>
+        </div>
+        <div class="vid-status status-unlocked">▶ Unlocked</div>
+      </div>
+      <div class="vid-body">
+        <div class="video-placeholder" id="player-2-1">
+          <div class="player-label">FuturePro — Day 2</div>
+          <div class="play-btn">▶</div>
+          <div class="vid-prog-bar" id="vbar-2-1" style="width:0%"></div>
+          <div class="vid-timer" id="vtimer-2-1">0:00 / 22:00</div>
+        </div>
+        <button class="sim-watch-btn" id="watchbtn-2-1" onclick="simulateWatch(2,1)">▶ Start Watching</button>
+        <div class="quiz-panel" id="quiz-2-1" style="display:none">
+          <div class="quiz-title">📋 FuturePro Check-In — Day 2, Session 1</div>
+          <div class="question"><p>1. Are you interested in applying these digital skills?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q10','yes')">✅ Yes, definitely!</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q10','no')">🤔 Still exploring</button>
+            </div></div>
+          <div class="question"><p>2. Did you understand the tools presented?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q11','yes')">✅ Yes, very clear</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q11','no')">🔁 Need more explanation</button>
+            </div></div>
+          <div class="question"><p>3. Do you want to continue to Session 2?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q12','yes')">🚀 Continue!</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q12','no')">⏸ Short break</button>
+            </div></div>
+          <button class="next-btn" id="nextbtn-2-1" onclick="unlockNext(2,2)">Unlock Session 2 →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-card locked-card" id="card-2-2">
+      <div class="vid-header">
+        <div class="vid-num">2</div>
+        <div class="vid-info">
+          <div class="vid-title">Building Your Future Income Streams</div>
+          <div class="vid-meta">FuturePro Institute · Day 2, Session 2 · ~25 mins</div>
+        </div>
+        <div class="vid-status status-locked">🔒 Locked</div>
+      </div>
+      <div class="vid-body">
+        <div class="video-placeholder"><div class="player-label">Complete Session 1 to unlock</div><div class="play-btn" style="opacity:0.3">🔒</div></div>
+        <button class="sim-watch-btn" id="watchbtn-2-2" onclick="simulateWatch(2,2)" disabled>🔒 Complete Session 1 First</button>
+        <div class="quiz-panel" id="quiz-2-2" style="display:none">
+          <div class="quiz-title">📋 FuturePro Check-In — Day 2, Session 2</div>
+          <div class="question"><p>1. Can you see yourself building income using these strategies?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q13','yes')">✅ Yes, I can!</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q13','no')">🤔 Need guidance</button>
+            </div></div>
+          <div class="question"><p>2. Did the income stream models make sense?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q14','yes')">✅ Perfectly clear</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q14','no')">🔁 Want more detail</button>
+            </div></div>
+          <div class="question"><p>3. Ready for Session 3?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q15','yes')">🚀 Yes!</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q15','no')">⏸ Not yet</button>
+            </div></div>
+          <button class="next-btn" id="nextbtn-2-2" onclick="unlockNext(2,3)">Unlock Session 3 →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-card locked-card" id="card-2-3">
+      <div class="vid-header">
+        <div class="vid-num">3</div>
+        <div class="vid-info">
+          <div class="vid-title">Automation Tools &amp; Practical Implementation</div>
+          <div class="vid-meta">FuturePro Institute · Day 2, Session 3 · ~20 mins</div>
+        </div>
+        <div class="vid-status status-locked">🔒 Locked</div>
+      </div>
+      <div class="vid-body">
+        <div class="video-placeholder"><div class="player-label">Complete Session 2 to unlock</div><div class="play-btn" style="opacity:0.3">🔒</div></div>
+        <button class="sim-watch-btn" id="watchbtn-2-3" onclick="simulateWatch(2,3)" disabled>🔒 Complete Session 2 First</button>
+        <div class="quiz-panel" id="quiz-2-3" style="display:none">
+          <div class="quiz-title">📋 FuturePro Check-In — Day 2, Session 3</div>
+          <div class="question"><p>1. Are you interested in implementing these automation tools?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q16','yes')">✅ Absolutely!</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q16','no')">🤔 Need more info</button>
+            </div></div>
+          <div class="question"><p>2. Did you understand how to use these tools practically?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q17','yes')">✅ Yes, very practical</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q17','no')">🔁 Need practice</button>
+            </div></div>
+          <div class="question"><p>3. Are you ready for Day 3 — the final mastery session?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q18','yes')">🚀 Ready for Day 3!</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q18','no')">⏸ Need a day</button>
+            </div></div>
+          <button class="next-btn" id="nextbtn-2-3" onclick="completeDay2()">✅ Complete Day 2!</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-complete" id="daydone-2">
+      <div style="font-size:2rem;margin-bottom:0.5rem">🏆</div>
+      <h3>Day 2 Complete — Amazing Progress!</h3>
+      <p style="margin-bottom:1rem">You're now eligible for Day 3 — Final Mastery &amp; Government Certification!</p>
+      <button class="unlock-day-btn btn-day3-unlock" onclick="showPayment(3)">🔓 Unlock Day 3 →</button>
+    </div>
+
+    <div class="payment-gate" id="payment-gate-3">
+      <div id="pay3-form">
+        <div class="pay-header" style="background:linear-gradient(135deg,#1a0e00,#0a0f20)">
+          <div class="pay-lock-icon">🏆</div>
+          <h2 style="color:var(--gold)">Unlock Day 3 — Mastery</h2>
+          <p>Complete advanced programme with Government Certification, mentorship &amp; lifetime access</p>
+        </div>
+        <div class="pay-body">
+          <div class="pay-plan plan-day3">
+            <div class="plan-label">Day 3 — Full Mastery Programme</div>
+            <div class="plan-price">₹36,000</div>
+            <div class="plan-sub">Complete certification package · Lifetime access</div>
+            <ul class="plan-features">
+              <li><span>🏆</span> Advanced Automation Strategies (28 mins)</li>
+              <li><span>🏆</span> Financial Freedom Roadmap (30 mins)</li>
+              <li><span>🎓</span> Government Certified Completion Certificate (NSDC)</li>
+              <li><span>👨‍🏫</span> 1-on-1 Mentorship Session with Expert</li>
+              <li><span>📱</span> Lifetime access to all course materials</li>
+              <li><span>🤝</span> FuturePro Alumni Network membership</li>
+              <li><span>💼</span> Job placement assistance</li>
+              <li><span>🔄</span> 30-day money-back guarantee</li>
+            </ul>
+            <div style="font-size:0.75rem;color:var(--muted);margin-bottom:1rem;text-align:center">Choose payment method:</div>
+            <div class="pay-methods">
+              <div class="pay-method selected" onclick="selMethod(this)">📱 UPI</div>
+              <div class="pay-method" onclick="selMethod(this)">🏦 Net Banking</div>
+              <div class="pay-method" onclick="selMethod(this)">💳 Card / EMI</div>
+              <div class="pay-method" onclick="selMethod(this)">📲 Paytm</div>
+              <div class="pay-method" onclick="selMethod(this)">🟢 PhonePe</div>
+            </div>
+            <div class="upi-input-wrap">
+              <input class="upi-input" type="text" placeholder="Enter UPI ID (e.g. name@upi)" id="upi3"/>
+              <button class="upi-verify-btn" onclick="verifyUPI('upi3')">Verify</button>
+            </div>
+            <div style="background:rgba(245,197,24,0.07);border:1px solid rgba(245,197,24,0.2);border-radius:8px;padding:0.8rem;font-size:0.78rem;color:var(--gold);margin-bottom:1rem;text-align:center">
+              💡 EMI available · Zero cost EMI on select cards
+            </div>
+            <div class="pay-secure">🔒 256-bit SSL &nbsp;·&nbsp; ✅ RBI Compliant &nbsp;·&nbsp; 🛡️ 100% Safe</div>
+            <button class="pay-now-btn btn-day3" onclick="processPayment(3)">Pay &amp; Get Certified →</button>
+          </div>
+        </div>
+      </div>
+      <div class="pay-success" id="pay3-success">
+        <div class="tick">🎓</div>
+        <h3 style="color:var(--gold)">Payment Successful!</h3>
+        <p>Day 3 is now unlocked. Your government certification awaits!</p>
+        <button class="proceed-btn gold-btn" onclick="unlockDay(3)">Go to Day 3 →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div id="day-3" style="display:none">
+
+    <div class="video-card active-card" id="card-3-1">
+      <div class="vid-header">
+        <div class="vid-num">1</div>
+        <div class="vid-info">
+          <div class="vid-title">Advanced Automation Strategies for Prospects</div>
+          <div class="vid-meta">FuturePro Institute · Day 3, Session 1 · ~28 mins</div>
+        </div>
+        <div class="vid-status status-unlocked">▶ Unlocked</div>
+      </div>
+      <div class="vid-body">
+        <div class="video-placeholder" id="player-3-1">
+          <div class="player-label">FuturePro — Final Mastery</div>
+          <div class="play-btn">▶</div>
+          <div class="vid-prog-bar" id="vbar-3-1" style="width:0%"></div>
+          <div class="vid-timer" id="vtimer-3-1">0:00 / 28:00</div>
+        </div>
+        <button class="sim-watch-btn" id="watchbtn-3-1" onclick="simulateWatch(3,1)">▶ Start Final Session 1</button>
+        <div class="quiz-panel" id="quiz-3-1" style="display:none">
+          <div class="quiz-title">📋 FuturePro Check-In — Day 3, Session 1</div>
+          <div class="question"><p>1. Are you ready to apply advanced automation in real scenarios?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q19','yes')">✅ Yes, ready to act!</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q19','no')">🤔 Need more prep</button>
+            </div></div>
+          <div class="question"><p>2. Are you making strong progress in your learning?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q20','yes')">✅ Great progress!</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q20','no')">🔁 Moderate progress</button>
+            </div></div>
+          <div class="question"><p>3. Want to continue to the final session?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q21','yes')">🚀 Let's finish strong!</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q21','no')">⏸ Short break</button>
+            </div></div>
+          <button class="next-btn" id="nextbtn-3-1" onclick="unlockNext(3,2)">Unlock Final Session 2 →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-card locked-card" id="card-3-2">
+      <div class="vid-header">
+        <div class="vid-num">2</div>
+        <div class="vid-info">
+          <div class="vid-title">Your Roadmap to Financial Freedom &amp; Certified Success</div>
+          <div class="vid-meta">FuturePro Institute · Day 3, Session 2 · ~30 mins</div>
+        </div>
+        <div class="vid-status status-locked">🔒 Locked</div>
+      </div>
+      <div class="vid-body">
+        <div class="video-placeholder"><div class="player-label">Complete Session 1 to unlock</div><div class="play-btn" style="opacity:0.3">🔒</div></div>
+        <button class="sim-watch-btn" id="watchbtn-3-2" onclick="simulateWatch(3,2)" disabled>🔒 Complete Session 1 First</button>
+        <div class="quiz-panel" id="quiz-3-2" style="display:none">
+          <div class="quiz-title">📋 FuturePro Final Check-In — Day 3, Session 2</div>
+          <div class="question"><p>1. Can you now see a clear path to your financial freedom?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q22','yes')">✅ Yes, crystal clear!</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q22','no')">🤔 Need mentoring</button>
+            </div></div>
+          <div class="question"><p>2. Have you made excellent progress across all 3 days?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q23','yes')">✅ Excellent progress!</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q23','no')">🔁 Some gaps remain</button>
+            </div></div>
+          <div class="question"><p>3. Are you ready to receive your government certificate?</p>
+            <div class="options">
+              <button class="opt-btn" onclick="selectOpt(this,'q24','yes')">🏆 Yes! Certify me!</button>
+              <button class="opt-btn" onclick="selectOpt(this,'q24','no')">⏸ Almost ready</button>
+            </div></div>
+          <button class="next-btn" id="nextbtn-3-2" onclick="completeProgramme()">🎓 Complete FuturePro Programme!</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-complete" id="daydone-3" style="border-color:var(--gold);background:linear-gradient(135deg,rgba(245,197,24,0.07),rgba(0,198,255,0.07))">
+      <div style="font-size:2.5rem;margin-bottom:0.5rem">🎓</div>
+      <h3 style="color:var(--gold);font-size:1.4rem">Congratulations — Programme Complete!</h3>
+      <p style="margin-bottom:0.4rem">You have successfully completed the <strong>FuturePro Institute</strong> 3-Day Programme.</p>
+      <p style="color:var(--gold);font-size:0.82rem;margin-bottom:0.2rem">📜 Government Certified · NSDC Approved · Digital India Partner</p>
+      <p style="color:var(--muted);font-size:0.78rem">Reg. No: NSDC/FPI/2024/04872</p>
+      <button style="margin-top:1rem;padding:0.75rem 2rem;background:var(--gold);color:#000;border:none;border-radius:8px;font-family:var(--font-head);font-weight:700;font-size:0.95rem;cursor:pointer">📜 Download Government Certificate</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const state={completedVideos:new Set(),quizAnswers:{},dayUnlocked:{1:true,2:false,3:false},totalVideos:8};
+function updateProgress(){const done=state.completedVideos.size;const pct=Math.round((done/state.totalVideos)*100);document.getElementById('prog-bar').style.width=pct+'%';document.getElementById('prog-pct').textContent=pct+'% Complete';}
+function simulateWatch(day,vid){
+  const btn=document.getElementById('watchbtn-'+day+'-'+vid);
+  const bar=document.getElementById('vbar-'+day+'-'+vid);
+  const timer=document.getElementById('vtimer-'+day+'-'+vid);
+  const durs={'1-1':15,'1-2':20,'1-3':18,'2-1':22,'2-2':25,'2-3':20,'3-1':28,'3-2':30};
+  const dur=durs[day+'-'+vid]||15;
+  btn.disabled=true;btn.textContent='⏳ Loading...';
+  let p=0;
+  const iv=setInterval(()=>{p+=2;if(bar)bar.style.width=p+'%';const el=Math.round((p/100)*dur);const m=Math.floor(el/60);const s=el%60;if(timer)timer.textContent=m+':'+(s<10?'0':'')+s+' / '+dur+':00';btn.textContent='▶ Watching... '+p+'%';if(p>=100){clearInterval(iv);btn.textContent='✅ Watched! Answer check-in below';showQuiz(day,vid);}},80);
+}
+function showQuiz(day,vid){const q=document.getElementById('quiz-'+day+'-'+vid);if(q){q.style.display='block';q.scrollIntoView({behavior:'smooth',block:'start'});}}
+function selectOpt(el,qid,val){
+  el.parentElement.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('selected-yes','selected-no'));
+  el.classList.add(val==='yes'?'selected-yes':'selected-no');
+  state.quizAnswers[qid]=val;
+  const qp=el.closest('.quiz-panel');
+  if(qp.querySelectorAll('.opt-btn.selected-yes,.opt-btn.selected-no').length>=qp.querySelectorAll('.question').length){const nb=qp.querySelector('.next-btn');if(nb)nb.style.display='block';}
+}
+function unlockNext(day,nextVid){
+  const curVid=nextVid-1;state.completedVideos.add(day+'-'+curVid);updateProgress();
+  const cc=document.getElementById('card-'+day+'-'+curVid);
+  if(cc){cc.classList.remove('active-card');cc.classList.add('done-card');cc.querySelector('.vid-status').className='vid-status status-done';cc.querySelector('.vid-status').textContent='✓ Completed';}
+  const nc=document.getElementById('card-'+day+'-'+nextVid);
+  if(nc){nc.classList.remove('locked-card');nc.classList.add('active-card');nc.querySelector('.vid-status').className='vid-status status-unlocked';nc.querySelector('.vid-status').textContent='▶ Unlocked';
+    const nb=document.getElementById('watchbtn-'+day+'-'+nextVid);if(nb){nb.disabled=false;nb.textContent='▶ Start Watching Session '+nextVid;}nc.scrollIntoView({behavior:'smooth',block:'start'});}
+}
+function completeDay1(){state.completedVideos.add('1-3');updateProgress();const lc=document.getElementById('card-1-3');if(lc){lc.classList.remove('active-card');lc.classList.add('done-card');lc.querySelector('.vid-status').className='vid-status status-done';lc.querySelector('.vid-status').textContent='✓ Completed';}const dd=document.getElementById('daydone-1');dd.style.display='block';dd.scrollIntoView({behavior:'smooth',block:'start'});}
+function completeDay2(){state.completedVideos.add('2-3');updateProgress();const lc=document.getElementById('card-2-3');if(lc){lc.classList.remove('active-card');lc.classList.add('done-card');lc.querySelector('.vid-status').className='vid-status status-done';lc.querySelector('.vid-status').textContent='✓ Completed';}const dd=document.getElementById('daydone-2');dd.style.display='block';dd.scrollIntoView({behavior:'smooth',block:'start'});}
+function completeProgramme(){state.completedVideos.add('3-2');updateProgress();const lc=document.getElementById('card-3-2');if(lc){lc.classList.remove('active-card');lc.classList.add('done-card');lc.querySelector('.vid-status').className='vid-status status-done';lc.querySelector('.vid-status').textContent='✓ Completed';}const dd=document.getElementById('daydone-3');dd.style.display='block';dd.scrollIntoView({behavior:'smooth',block:'start'});}
+function showPayment(day){const gate=document.getElementById('payment-gate-'+day);gate.style.display='block';gate.scrollIntoView({behavior:'smooth',block:'start'});}
+function selMethod(el){el.closest('.pay-methods').querySelectorAll('.pay-method').forEach(m=>m.classList.remove('selected'));el.classList.add('selected');}
+function verifyUPI(id){const input=document.getElementById(id);if(input.value.includes('@')){input.style.borderColor='var(--green)';}else{input.style.borderColor='var(--red)';alert('Please enter a valid UPI ID (e.g. name@upi)');}}
+function processPayment(day){document.getElementById('pay'+day+'-form').style.display='none';const s=document.getElementById('pay'+day+'-success');s.style.display='block';s.scrollIntoView({behavior:'smooth',block:'center'});}
+function unlockDay(day){
+  state.dayUnlocked[day]=true;
+  const tab=document.querySelector('[data-day="'+day+'"]');
+  if(tab){tab.classList.remove('locked');tab.textContent=day===2?'📅 Day 2 — Growth':'📅 Day 3 — Mastery';}
+  switchDay(day);
+}
+function switchDay(day){
+  if(!state.dayUnlocked[day]){showPayment(day);return;}
+  document.querySelectorAll('[id^="day-"]').forEach(d=>d.style.display='none');
+  document.getElementById('day-'+day).style.display='block';
+  document.querySelectorAll('.day-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelector('[data-day="'+day+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+updateProgress();
+</script>
+</body>
+</html>
